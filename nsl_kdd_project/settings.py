@@ -11,20 +11,13 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ===========================
-# SECRET_KEY y DEBUG
+# CONFIGURACIÓN BÁSICA
 # ===========================
-SECRET_KEY = os.environ.get(
-    "DJANGO_SECRET_KEY",
-    "clave_por_defecto_para_desarrollo"
-)
+DEBUG = True  # Cambiar a False en producción
+import os
 
-DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "True"
-
-# ===========================
-# ALLOWED_HOSTS
-# ===========================
-# Permite múltiples hosts separados por coma
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost").split(",")
+
 
 # ===========================
 # APPS INSTALADAS
@@ -52,11 +45,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# ===========================
-# URLS Y WSGI
-# ===========================
 ROOT_URLCONF = 'nsl_kdd_project.urls'
-WSGI_APPLICATION = 'nsl_kdd_project.wsgi.application'
 
 # ===========================
 # TEMPLATES
@@ -64,16 +53,20 @@ WSGI_APPLICATION = 'nsl_kdd_project.wsgi.application'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {'context_processors': [
-            'django.template.context_processors.debug',
-            'django.template.context_processors.request',
-            'django.contrib.auth.context_processors.auth',
-            'django.contrib.messages.context_processors.messages',
-        ]},
+        'DIRS': [BASE_DIR / 'templates'],  # Carpeta global de templates
+        'APP_DIRS': True,  # Detecta templates dentro de apps
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
     },
 ]
+
+WSGI_APPLICATION = 'nsl_kdd_project.wsgi.application'
 
 # ===========================
 # BASE DE DATOS
@@ -81,7 +74,7 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # Para producción recomendable usar Postgres
+        'NAME': BASE_DIR / 'db.sqlite3',  # Archivo SQLite
     }
 }
 
@@ -89,10 +82,18 @@ DATABASES = {
 # VALIDACIÓN DE CONTRASEÑAS
 # ===========================
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 # ===========================
@@ -117,6 +118,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
 
 # ===========================
-# CARPETA PARA ARFF FILES
+# ARFF FILES
 # ===========================
+# Carpeta relativa dentro del proyecto para tus archivos ARFF
 ARFF_FILES_DIR = BASE_DIR / "datasets" / "NSL-KDD"
+SECRET_KEY = 'xKUg2Ng0C9KOL9lR5BSeaovzJpsUsUro7FhnQT6C3hwV14-Cf63WA0nAqIEuSs2VbBE'
