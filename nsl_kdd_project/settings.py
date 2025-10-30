@@ -14,8 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # CONFIGURACIÓN BÁSICA
 # ===========================
 DEBUG = True  # Cambiar a False en producción
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
-
+ALLOWED_HOSTS = ["nsl-5vec.onrender.com"]
 # ===========================
 # APPS INSTALADAS
 # ===========================
